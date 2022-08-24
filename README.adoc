@@ -1,31 +1,56 @@
-= Starter
+# code-with-quarkus Project
 
-image:https://img.shields.io/badge/vert.x-4.3.3-purple.svg[link="https://vertx.io"]
+This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
-This application was generated using http://start.vertx.io
+If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
 
-== Building
+## Running the application in dev mode
 
-To launch your tests:
-```
-./mvnw clean test
-```
-
-To package your application:
-```
-./mvnw clean package
+You can run your application in dev mode that enables live coding using:
+```shell script
+./mvnw compile quarkus:dev
 ```
 
-To run your application:
+> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
+
+## Packaging and running the application
+
+The application can be packaged using:
+```shell script
+./mvnw package
 ```
-./mvnw clean compile exec:java
+It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
+Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
+
+The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
+
+If you want to build an _über-jar_, execute the following command:
+```shell script
+./mvnw package -Dquarkus.package.type=uber-jar
 ```
 
-== Help
+The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
 
-* https://vertx.io/docs/[Vert.x Documentation]
-* https://stackoverflow.com/questions/tagged/vert.x?sort=newest&pageSize=15[Vert.x Stack Overflow]
-* https://groups.google.com/forum/?fromgroups#!forum/vertx[Vert.x User Group]
-* https://gitter.im/eclipse-vertx/vertx-users[Vert.x Gitter]
+## Creating a native executable
 
+You can create a native executable using: 
+```shell script
+./mvnw package -Pnative
+```
 
+Or, if you don't have GraalVM installed, you can run the native executable build in a container using: 
+```shell script
+./mvnw package -Pnative -Dquarkus.native.container-build=true
+```
+
+You can then execute your native executable with: `./target/code-with-quarkus-1.0.0-SNAPSHOT-runner`
+
+If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.
+
+## Provided Code
+
+### RESTEasy Reactive
+
+Easily start your Reactive RESTful Web Services
+
+[Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
